@@ -8,7 +8,6 @@ import pytest
 
 from gaiaxpy import linefinder, extremafinder, fastfinder
 from gaiaxpy.core.generic_functions import str_to_array
-# from gaiaxpy.core.generic_functions import str_to_array
 from tests.files.paths import files_path
 
 # Input file with xp continuous spectra
@@ -41,6 +40,10 @@ def custom_comparison(df_computed, df_solution, column):
                 raise ValueError('DataFrames are different.')
     else:
         raise ValueError('DataFrames are different.')
+    # Compare the rest of the DataFrame
+    df_computed = df_computed.drop(columns=[column])
+    df_solution = df_solution.drop(columns=[column])
+    pdt.assert_frame_equal(df_computed, df_solution)
 
 
 # Define the converter function
