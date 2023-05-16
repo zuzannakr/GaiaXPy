@@ -29,8 +29,10 @@ from .config import get_config, load_config
 # Activate tqdm for pandas
 tqdm.pandas(desc='Processing data', unit=pbar_units['converter'], leave=False, colour=pbar_colour)
 
+default_sampling = np.linspace(0, 60, 600)
 
-def convert(input_object: Union[list, Path, str], sampling: np.ndarray = np.linspace(0, 60, 600),
+
+def convert(input_object: Union[list, Path, str], sampling: np.ndarray = default_sampling,
             truncation: bool = False, with_correlation: bool = False, output_path: Union[Path, str] = '.',
             output_file: str = 'output_spectra', output_format: str = None, save_file: bool = True,
             username: str = None, password: str = None) -> (pd.DataFrame, np.ndarray):
